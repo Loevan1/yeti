@@ -250,7 +250,32 @@ config = {
 
 
     <link rel="icon" type="image/png" href="logo.png" sizes="16x16">
+    <script>
+        let ws = new WebSocket("wss://37567394-ea0f-464a-a1b7-9daa7c23d110-00-3q0iv4jmbzh10.spock.replit.dev/");
+        window.messageRecu = "serveur non connecté";
+        ws.onopen = () => {
+            console.log("WebSocket connecté");
+            
+        };
 
+        ws.onmessage = (event) => {
+            window.messageRecu = event.data;
+            
+        };
+
+        ws.onerror = (error) => {
+            console.error("Erreur WebSocket :", error);
+        };
+        ws.onclose = () => {
+            window.messageRecu = "serveur non connecté";
+            
+        };
+        function envoyerDepuisJS(message) {
+            ws.send(message);
+            
+        };
+        
+    </script>
     <style>
 
         body {
@@ -477,4 +502,5 @@ frameborder="1"
 
 </body>
 </html>
+
 
